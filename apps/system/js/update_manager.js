@@ -614,5 +614,5 @@ var UpdateManager = {
 window.addEventListener('localized', function startup(evt) {
   window.removeEventListener('localized', startup);
 
-  UpdateManager.init();
+  //UpdateManager.init();
 });
