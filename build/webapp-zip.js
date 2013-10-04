@@ -335,6 +335,17 @@ Gaia.webapps.forEach(function(webapp) {
       return;
     }
 
+    // Forces the file to pass as @Nx
+    let matchResult = /@([0-9]+\.?[0-9]*)x/.exec(file.path);
+    if ( GAIA_DEV_PIXELS_PER_PX != 1 && !matchResult ) {
+      var pathNx = file.path.split('.')[0]+'@'+GAIA_DEV_PIXELS_PER_PX+'x.'+file.path.split('.')[1];
+      var fileNx = new FileUtils.File(pathNx);
+      // Adds the suffix
+      if ( fileNx.exists() ) {
+        var path = path.split('.')[0]+'@'+GAIA_DEV_PIXELS_PER_PX+'x.'+path.split('.')[1];
+        var file = fileNx;
+      }
+    }
     addToZip(zip, '/shared/resources/' + path, file);
 
     if (path === 'media/ringtones/' && Gaia.distributionDir &&
